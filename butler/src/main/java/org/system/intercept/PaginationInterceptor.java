@@ -31,10 +31,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
- * @Date 2016年10月28日
- * @Version 1.0
- * @Description 自动分页插件
+ * 
+ * @ClassName: PaginationInterceptor
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午2:00:45
+ * @version: 1.0
+ * @Description: 自动分页插件
  */
 @Intercepts({ @Signature(type = Executor.class, method = "query", args = { MappedStatement.class, Object.class,
 		RowBounds.class, ResultHandler.class }) })
@@ -43,6 +45,7 @@ public class PaginationInterceptor implements Interceptor {
 
 	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see org.apache.ibatis.plugin.Interceptor#intercept(org.apache.ibatis.plugin.Invocation)
 	 */
 	@Override

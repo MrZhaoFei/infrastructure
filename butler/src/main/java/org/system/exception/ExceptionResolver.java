@@ -15,10 +15,12 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 
 /**
- * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
- * @Date 2016年10月28日
- * @Version 1.0
- * @Description 全局异常处理类
+ * 
+ * @ClassName: ExceptionResolver
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午2:00:12
+ * @version: 1.0
+ * @Description: 全局异常处理类
  */
 public class ExceptionResolver extends SimpleMappingExceptionResolver {
 	Logger log = LoggerFactory.getLogger(ExceptionResolver.class);

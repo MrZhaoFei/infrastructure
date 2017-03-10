@@ -18,11 +18,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @ClassName ValidInterceptor
- * @author <font color="red"><b>LiuGangQiang</b></font>
- * @date 2016年2月1日
- * @version 1.0
- * @description 用于拦截hibernate validator校验的公用拦截器
+ * 
+ * @ClassName: ValidInterceptor
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午2:01:51
+ * @version: 1.0
+ * @Description: 用于拦截hibernate validator校验的公用拦截器
  */
 public class ValidInterceptor implements MethodInterceptor {
 	Logger log = LoggerFactory.getLogger(ValidInterceptor.class);

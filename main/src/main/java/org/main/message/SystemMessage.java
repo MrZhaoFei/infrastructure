@@ -4,13 +4,12 @@ import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 /**
- * <font color="green">系统提示资源绑定</font>
  * 
- * @ClassName BaseMessage
- * @author GangQiang
- * @date 2015年4月21日 上午11:05:41
- * 
- * @version 1.0
+ * @ClassName: SystemMessage
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午2:08:28
+ * @version: 1.0
+ * @Description: 系统提示资源绑定
  */
 public class SystemMessage {
 

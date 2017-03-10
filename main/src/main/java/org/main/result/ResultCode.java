@@ -3,10 +3,12 @@ package org.main.result;
 import org.main.message.SystemMessage;
 
 /**
- * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
- * @Date 2016年10月28日
- * @Version 1.0
- * @Description 状态码枚举类
+ * 
+ * @ClassName: ResultCode
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午2:08:54
+ * @version: 1.0
+ * @Description: 状态码枚举类
  */
 public enum ResultCode {
 

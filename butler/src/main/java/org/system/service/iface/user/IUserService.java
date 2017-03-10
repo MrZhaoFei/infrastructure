@@ -7,20 +7,24 @@ import org.system.entity.user.User;
 
 public interface IUserService {
 	/**
-	 * @author <font color="green"><b>Liu.Gang.Qiang</b></font>
+	 * 
+	 * @author <font color="green"><b>Zhao.Fei</b></font>
 	 * @param user
-	 * @return {@link List}
-	 * @date 2016年11月3日
+	 * @return
+	 * @return {@link List<Map<String,Object>>}
+	 * @date 2017年3月10日 下午2:03:38
 	 * @version 1.0
 	 * @description 获取用户角色集合
 	 */
 	List<Map<String, Object>> getRoleList(User user);
 
 	/**
-	 * @author <font color="green"><b>Liu.Gang.Qiang</b></font>
+	 * 
+	 * @author <font color="green"><b>Zhao.Fei</b></font>
 	 * @param user
-	 * @return {@link List}
-	 * @date 2016年11月3日
+	 * @return
+	 * @return {@link List<Map<String,Object>>}
+	 * @date 2017年3月10日 下午2:03:47
 	 * @version 1.0
 	 * @description 获取用户权限集合
 	 */

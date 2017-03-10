@@ -1,10 +1,12 @@
 package org.main.entity;
 
 /**
- * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
- * @Date 2016年10月28日
- * @Version 1.0
- * @Description 顶层实体类抽象类 包含分页属性
+ * 
+ * @ClassName: BaseEntity
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午2:05:44
+ * @version: 1.0
+ * @Description: 顶层实体类抽象类 包含分页属性
  */
 public class BaseEntity {
 
@@ -49,46 +51,56 @@ public class BaseEntity {
 	}
 
 	/**
-	 * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
-	 * @Date 2016年10月28日
-	 * @Version 1.0
-	 * @Description 用于新增单条记录的校验分组接口
+	 * 
+	 * @ClassName: Insert
+	 * @author: <font color="red"><b>ZhaoFei</b></font>
+	 * @date: 2017年3月10日 下午2:05:58
+	 * @version: 1.0
+	 * @Description: 用于新增单条记录的校验分组接口
 	 */
 	public interface Insert {
 	};
 
 	/**
-	 * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
-	 * @Date 2016年10月28日
-	 * @Version 1.0
-	 * @Description 用于修改单条记录的校验分组接口
+	 * 
+	 * @ClassName: Update
+	 * @author: <font color="red"><b>ZhaoFei</b></font>
+	 * @date: 2017年3月10日 下午2:06:11
+	 * @version: 1.0
+	 * @Description: 用于修改单条记录的校验分组接口
 	 */
 	public interface Update {
 	};
 
 	/**
-	 * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
-	 * @Date 2016年10月28日
-	 * @Version 1.0
-	 * @Description 用于查询多条记录的校验分组接口
+	 * 
+	 * @ClassName: SelectAll
+	 * @author: <font color="red"><b>ZhaoFei</b></font>
+	 * @date: 2017年3月10日 下午2:06:21
+	 * @version: 1.0
+	 * @Description: 用于查询多条记录的校验分组接口
 	 */
 	public interface SelectAll {
 	};
 
 	/**
-	 * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
-	 * @Date 2016年10月28日
-	 * @Version 1.0
-	 * @Description 用于查询条单条记录的校验分组接口
+	 * 
+	 * @ClassName: SelectOne
+	 * @author: <font color="red"><b>ZhaoFei</b></font>
+	 * @date: 2017年3月10日 下午2:06:32
+	 * @version: 1.0
+	 * @Description: 用于查询条单条记录的校验分组接口
 	 */
 	public interface SelectOne {
 	};
 
 	/**
-	 * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
-	 * @Date 2016年10月28日
-	 * @Version 1.0
-	 * @Description 用于删除记录的校验分组接口
+	 * 
+	 * @ClassName: Delete
+	 * @author: <font color="red"><b>ZhaoFei</b></font>
+	 * @date: 2017年3月10日 下午2:06:44
+	 * @version: 1.0
+	 * @Description: 用于删除记录的校验分组接口
 	 */
 	public interface Delete {
 	};

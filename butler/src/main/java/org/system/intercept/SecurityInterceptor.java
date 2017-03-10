@@ -25,10 +25,12 @@ import org.system.service.iface.user.IUserService;
 import com.alibaba.fastjson.JSON;
 
 /**
- * @author <font color="red"><b>Liu.Gang.Qiang</b></font>
- * @Date 2016年11月4日
- * @Version 1.0
- * @Description 权限拦截器 先判断角色后判断权限 角色>权限
+ * 
+ * @ClassName: SecurityInterceptor
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午2:01:11
+ * @version: 1.0
+ * @Description: 权限拦截器 先判断角色后判断权限 角色>权限
  */
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	Logger log = LoggerFactory.getLogger(SecurityInterceptor.class);
@@ -40,13 +42,15 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	private IUserService userService;
 
 	/**
-	 * @author <font color="green"><b>Liu.Gang.Qiang</b></font>
+	 * 
+	 * @author <font color="green"><b>Zhao.Fei</b></font>
 	 * @param list
 	 * @param auths
-	 * @return {@link Boolean}
-	 * @date 2016年11月4日
+	 * @return
+	 * @return {@link boolean}
+	 * @date 2017年3月10日 下午2:01:24
 	 * @version 1.0
-	 * @description 校验权限是否匹配
+	 * @description 权限拦截器 先判断角色后判断权限 角色>权限
 	 */
 	private boolean validate(List<Map<String, Object>> list, String[] auths) {
 		for (String auth : auths) {

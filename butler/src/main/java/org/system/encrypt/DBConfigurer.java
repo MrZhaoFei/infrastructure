@@ -8,11 +8,12 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.tools.des.DESUtil;
 
 /**
- * @ClassName DBConfigurer
- * @author <font color="red"><b>LiuGangQiang</b></font>
- * @date 2016年2月17日 下午4:04:32
- * @version 1.0
- * @description 数据配置文件加密生成类
+ * 
+ * @ClassName: DBConfigurer
+ * @author: <font color="red"><b>ZhaoFei</b></font>
+ * @date: 2017年3月10日 下午1:59:01
+ * @version: 1.0
+ * @Description: 数据配置文件加密生成类
  */
 public class DBConfigurer extends PropertyPlaceholderConfigurer {
 
@@ -56,5 +57,5 @@ public class DBConfigurer extends PropertyPlaceholderConfigurer {
 	public static String getKey() {
 		return key;
 	}
-	
+
 }
