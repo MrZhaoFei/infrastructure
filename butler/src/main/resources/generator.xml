@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 <generatorConfiguration>
 	<!-- 引用配置文件 -->
 	<properties resource="generator.properties" />
-	 <classPathEntry location="D:/Java/apache-maven-3.3.9/repository/mysql/mysql-connector-java/5.1.38/mysql-connector-java-5.1.38.jar" />
+	<classPathEntry location="${classpath}" /> 
 
 	<context id="butler" targetRuntime="MyBatis3Simple" defaultModelType="flat">
 		<!--去除注释 （true好像不起作用） -->
@@ -42,9 +42,10 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			targetPackage="${package.mapper}" targetProject="${project}">
 			<property name="enableSubPackages" value="true" />
 			<property name="rootInterface" value="org.main.mapper.IBaseMapper" />
+			<property name="methodNameCalculator" value="extended" />
 		</javaClientGenerator>
 
 		<!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等 -->
-		<table tableName="user"/>
+		<table tableName="fees_aduit"/>
 	</context>
 </generatorConfiguration>

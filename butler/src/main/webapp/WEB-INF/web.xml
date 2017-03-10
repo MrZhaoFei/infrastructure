@@ -7,10 +7,7 @@
 	<!-- 声明Spring配置文件所在目录 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			classpath*:applicationContext.xml,
-			classpath*:spring-*.xml
-		</param-value>
+		<param-value>classpath*:applicationContext.xml</param-value>
 	</context-param>
 	
 	<!-- 声明IntrospectorCleanupListener监听器防止反复加载对象造成内存泄漏 -->

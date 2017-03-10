@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans.xsd 
 						http://www.springframework.org/schema/context 
@@ -13,7 +13,9 @@
 						http://www.springframework.org/schema/tx 
 						http://www.springframework.org/schema/tx/spring-tx.xsd 
 						http://www.springframework.org/schema/cache 
-						http://www.springframework.org/schema/cache/spring-cache-3.2.xsd">
+						http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+						http://www.springframework.org/schema/task 
+						http://www.springframework.org/schema/task/spring-task-3.1.xsd ">
 						
 	<!-- 配置需要交给spring扫描管理的包,一般是包括整个项目的java文件的父包（由context提供） -->
 	<context:component-scan base-package="org.system,org.service.task" />
@@ -57,13 +59,13 @@
 		<property name="plugins" ref="PaginationInterceptor" />
 	</bean>
 	
+	<!-- Mybatis分页拦截器 -->
+	<bean name="PaginationInterceptor" class="org.system.intercept.PaginationInterceptor" />
+	
 	<!-- mybatis默认选项配置 -->
 	<bean id="configuration"  class="org.apache.ibatis.session.Configuration">
 		<property name="callSettersOnNulls" value="true"/>
 	</bean>
-	
-	<!-- Mybatis分页拦截器 -->
-	<bean name="PaginationInterceptor" class="org.system.intercept.PaginationInterceptor" />
 	
 	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -92,10 +94,89 @@
 	<!-- 配置该声明式事务规则用于的切入点 步骤： 1.配置切入点 2.应用该声明式事务规则 -->
 	<aop:config proxy-target-class="true" expose-proxy="true">
 		<!-- 配置切入点 -->
-		<aop:pointcut id="transaction_pointcut" expression="execution(* org.system.service.impl..*.*(..))" />
+		<aop:pointcut id="transaction_pointcut" expression="execution(* org.system.service.*.impl..*.*(..))" />
 		<!-- 应用该声明式事务规则 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="transaction_pointcut" />
 	</aop:config>
+	
+	<!-- redis pool相关配置 -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- 最小空闲数 -->
+		<property name="minIdle" value="${redis.minIdle}" />
+		<!-- 最大空闲数 -->
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<!-- 最大连接数 -->
+		<property name="maxTotal" value="${redis.maxTotal}" />
+		<!-- 最大等待时间 单位毫秒（ms） -->
+		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+		<!-- 使用连接时测试连接是否可用 -->
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+
+	<!-- jedis客户端连接工厂 -->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="poolConfig" ref="poolConfig" />
+		<property name="database" value="${redis.database}" />
+		<property name="port" value="${redis.port}" />
+		<property name="hostName" value="${redis.host}" />
+		<property name="password" value="${redis.password}" />
+	</bean>
+
+	<!-- redisTemplate模板 -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+	</bean>
+
+	<!-- redis缓存管理器 -->
+	<bean id="cacheManager" class="org.redis.cache.RedisCacheManager">
+		<constructor-arg name="redisOperations" ref="redisTemplate" />
+		<!-- 是否事务提交，如果事务回滚，缓存也回滚，默认false -->
+		<property name="transactionAware" value="true" />
+		<!-- 设置缓存超时时间 已实现自动续期 如果不设置将永久存在 -->
+		<property name="expires">
+			<map>
+				<entry key="userCache" value="3600" />
+				<entry key="permissionCache" value="1800" />
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 支持缓存注解 -->
+	<cache:annotation-driven cache-manager="cacheManager" />
+	
+	<!-- 邮件发送器 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- 协议类型 -->
+		<property name="protocol" value="${mail.smtp.type}" />
+		<!-- 服务器地址 -->
+		<property name="host" value="${mail.smtp.host}" />
+		<!-- 服务器端口 -->
+		<property name="port" value="${mail.smtp.port}" />
+		<!--用户名 -->
+		<property name="username" value="${mail.username}" />
+		<!-- 用户密码 -->
+		<property name="password" value="${mail.password}" />
+		<!-- 默认编码 -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 其他配置 -->
+		<property name="javaMailProperties">
+			<props>
+				<!--是否验证密码 -->
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<!-- 超时时间 -->
+				<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
+				<!-- SSL类配置 -->
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+				<!-- 是否开启STARTTLS验证 -->
+				<prop key="mail.smtp.starttls.enable">${mail.smtp.starttls}</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!--开启这个配置，spring才能识别@Scheduled注解 -->
+	<task:scheduler id="scheduler" pool-size="10" />
+	<task:executor id="executor" pool-size="5-10" queue-capacity="200" rejection-policy="CALLER_RUNS" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
 	
 	<!-- 异常拦截器 -->
 	<bean id="exceptionHandler" class="org.system.exception.ExceptionResolver" />
