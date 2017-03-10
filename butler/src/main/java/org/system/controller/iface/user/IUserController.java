@@ -2,7 +2,7 @@ package org.system.controller.iface.user;
 
 import java.util.Map;
 
-import org.main.annotation.RequiresPermissions;
+import org.main.annotation.RequiresMethods;
 import org.main.annotation.RequiresRoles;
 import org.main.entity.BaseEntity.Insert;
 import org.main.entity.BaseEntity.SelectAll;
@@ -32,7 +32,7 @@ public interface IUserController {
 	 */
 	@RequestMapping(value = { "/user/login" }, method = RequestMethod.GET)
 	@ResponseBody
-	@RequiresPermissions({ "user:login" })
+	@RequiresMethods(value = { "user:login" }, ignore = true)
 	public Map<String, Object> login(@Validated({ Login.class }) User user, BindingResult result);
 
 	/**
@@ -48,7 +48,7 @@ public interface IUserController {
 	 */
 	@RequestMapping(value = { "/user" }, method = RequestMethod.POST)
 	@ResponseBody
-	@RequiresPermissions({ "user:insert" })
+	@RequiresMethods({ "user:insert" })
 	public Map<String, Object> insertUser(@Validated({ Insert.class }) @RequestBody User user, BindingResult result);
 
 	/**

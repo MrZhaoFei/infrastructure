@@ -1,7 +1,6 @@
 package org.main.result;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.main.message.SystemMessage;
@@ -17,7 +16,7 @@ public class ResultMap {
 	 * @param body
 	 * @return {@link Map}
 	 */
-	public static Map<String, Object> convertMap(ResultCode code, Map<String, Object> body) {
+	public static Map<String, Object> convertMap(ResultCode code, Object body) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(SystemMessage.bundle("result.code.key"), code.getValue());
 		map.put(SystemMessage.bundle("result.date.key"), body);
@@ -33,7 +32,7 @@ public class ResultMap {
 	 * @param message
 	 * @return {@link Map}
 	 */
-	public static Map<String, Object> convertMap(ResultCode code, Map<String, Object> body, String message) {
+	public static Map<String, Object> convertMap(ResultCode code, Object body, String message) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(SystemMessage.bundle("result.code.key"), code.getValue());
 		map.put(SystemMessage.bundle("result.date.key"), body);
@@ -49,11 +48,11 @@ public class ResultMap {
 	 * @param data
 	 * @return {@link Map}
 	 */
-	public static Map<String, Object> convertMap(ResultCode code, Integer total, List<Map<String, Object>> dataList) {
+	public static Map<String, Object> convertMap(ResultCode code, Integer total, Object data) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put(ResultMap.total, total);
-		body.put(ResultMap.rows, dataList);
+		body.put(ResultMap.rows, data);
 		map.put(SystemMessage.bundle("result.code.key"), code.getValue());
 		map.put(SystemMessage.bundle("result.date.key"), body);
 		map.put(SystemMessage.bundle("result.message.key"), code.getMessage());
@@ -69,12 +68,11 @@ public class ResultMap {
 	 * @param message
 	 * @return {@link Map}
 	 */
-	public static Map<String, Object> convertMap(ResultCode code, Integer total, List<Map<String, Object>> dataList,
-			String message) {
+	public static Map<String, Object> convertMap(ResultCode code, Integer total, Object data, String message) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> body = new HashMap<String, Object>();
 		body.put(ResultMap.total, total);
-		body.put(ResultMap.rows, dataList);
+		body.put(ResultMap.rows, data);
 		map.put(SystemMessage.bundle("result.code.key"), code.getValue());
 		map.put(SystemMessage.bundle("result.date.key"), body);
 		map.put(SystemMessage.bundle("result.message.key"), message);

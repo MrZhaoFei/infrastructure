@@ -18,19 +18,18 @@ public class UserService implements IUserService {
 	private UserMapper userMapper;
 
 	@Override
-	@Cacheable(value = Global.CACHE_PERMISSION, key = "'user:role:'+#user.id", condition = "#user.id ne null", unless = "#result eq null")
-	public List<Map<String, Object>> getRoleList(User user) {
-		return userMapper.getRoleList(user);
+	public List<Map<String, Object>> getRoleList(Map<String, Object> permissionMap) {
+		return userMapper.getRoleList(permissionMap);
 	}
 
 	@Override
-	@Cacheable(value = Global.CACHE_PERMISSION, key = "'user:permission:'+#user.id", condition = "#user.id ne null", unless = "#result eq null")
-	public List<Map<String, Object>> getPermissionList(User user) {
-		return userMapper.getPermissionList(user);
+	public List<Map<String, Object>> getPermissionList(Map<String, Object> permissionMap) {
+		return userMapper.getPermissionList(permissionMap);
 	}
 
 	@Override
-	@Cacheable(value = Global.CACHE_USER, key = "#user.phone", condition = "#user.phone ne null", unless = "#result eq null")
+	// @Cacheable(value = Global.CACHE_USER, key = "#user.phone", condition =
+	// "#user.phone ne null", unless = "#result eq null")
 	public Map<String, Object> getUser(User user) {
 		return userMapper.selectOne(user);
 	}
@@ -49,4 +48,17 @@ public class UserService implements IUserService {
 	public Map<String, Object> selectExist(User user) {
 		return userMapper.selectIsExists(user);
 	}
+
+	@Override
+	@Cacheable(value = Global.CACHE_PERMISSION, key = "'user:role:'+#user.id", condition = "#user.id ne null", unless = "#result eq null")
+	public List<Map<String, Object>> getRoleList(User user) {
+		return userMapper.getRoleList(user);
+	}
+
+	@Override
+	@Cacheable(value = Global.CACHE_PERMISSION, key = "'user:permission:'+#user.id", condition = "#user.id ne null", unless = "#result eq null")
+	public List<Map<String, Object>> getPermissionList(User user) {
+		return userMapper.getPermissionList(user);
+	}
+
 }

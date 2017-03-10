@@ -16,8 +16,9 @@ public interface IUserService {
 	 * @version 1.0
 	 * @description 获取用户角色集合
 	 */
-	List<Map<String, Object>> getRoleList(User user);
+	List<Map<String, Object>> getRoleList(Map<String, Object> permissionMap);
 
+	List<Map<String, Object>> getRoleList(User user);
 	/**
 	 * 
 	 * @author <font color="green"><b>Zhao.Fei</b></font>
@@ -28,8 +29,10 @@ public interface IUserService {
 	 * @version 1.0
 	 * @description 获取用户权限集合
 	 */
+	List<Map<String, Object>> getPermissionList(Map<String, Object> permissionMap);
+	
 	List<Map<String, Object>> getPermissionList(User user);
-
+	
 	Map<String, Object> getUser(User user);
 
 	int insertUser(User user);

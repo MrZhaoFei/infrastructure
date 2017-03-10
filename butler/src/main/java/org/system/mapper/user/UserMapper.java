@@ -8,7 +8,11 @@ import org.system.entity.user.User;
 
 public interface UserMapper extends IBaseMapper<User> {
 
-	List<Map<String, Object>> getRoleList(User user);
+	List<Map<String, Object>> getRoleList(Map<String, Object> permissionMap);
 
+	List<Map<String, Object>> getPermissionList(Map<String, Object> permissionMap);
+	
+	List<Map<String, Object>> getRoleList(User user);
+	
 	List<Map<String, Object>> getPermissionList(User user);
 }
